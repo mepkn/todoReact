@@ -1,16 +1,10 @@
-import { TodoListProps } from "../types";
-import { TodoItem } from "./TodoItem";
+import { useNavigate } from "react-router-dom";
+import { useTodoContext } from "../hooks/useTodoContext";
 
-export const TodoList = ({
-  todos,
-  editingId,
-  editText,
-  enterEditMode,
-  setEditText,
-  saveEdit,
-  toggleTodo,
-  deleteTodo,
-}: TodoListProps) => {
+export const TodoList = () => {
+  const navigate = useNavigate();
+  const { sortedTodos, toggleTodo } = useTodoContext();
+
   return (
     <ul
       style={{
@@ -21,18 +15,41 @@ export const TodoList = ({
         gap: "8px",
       }}
     >
-      {todos.map((todo) => (
-        <TodoItem
+      {sortedTodos.map((todo) => (
+        <li
           key={todo.id}
-          todo={todo}
-          editingId={editingId}
-          editText={editText}
-          enterEditMode={enterEditMode}
-          setEditText={setEditText}
-          saveEdit={saveEdit}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-        />
+          style={{ display: "flex", alignItems: "center", gap: "10px" }}
+        >
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo.id)}
+            style={{ flexShrink: 0 }}
+          />
+          <span
+            style={{
+              flexGrow: 1,
+              textDecoration: todo.completed ? "line-through" : "none",
+              wordBreak: "break-word",
+              overflowWrap: "break-word",
+              whiteSpace: "normal",
+            }}
+          >
+            {todo.text}
+          </span>
+          <button
+            className="pico-background-jade-500"
+            onClick={() => navigate(`/todo/${todo.id}/edit`)}
+          >
+            Edit
+          </button>
+          <button
+            className="pico-background-red-500"
+            onClick={() => navigate(`/todo/${todo.id}/delete`)}
+          >
+            Delete
+          </button>
+        </li>
       ))}
     </ul>
   );

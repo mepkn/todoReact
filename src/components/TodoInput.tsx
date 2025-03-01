@@ -1,6 +1,13 @@
-import { TodoInputProps } from "../types";
+import { useTodoContext } from "../hooks/useTodoContext";
 
-export const TodoInput = ({ input, setInput, addTodo }: TodoInputProps) => {
+export const TodoInput = () => {
+  const { input, setInput, addTodo } = useTodoContext();
+
+  const handleAddTodo = () => {
+    addTodo(input);
+    setInput("");
+  };
+
   return (
     <div
       style={{
@@ -17,7 +24,7 @@ export const TodoInput = ({ input, setInput, addTodo }: TodoInputProps) => {
         placeholder="Add a new todo"
         style={{ marginBottom: "0px" }}
       />
-      <button onClick={addTodo}>Add</button>
+      <button onClick={handleAddTodo}>Add</button>
     </div>
   );
 };

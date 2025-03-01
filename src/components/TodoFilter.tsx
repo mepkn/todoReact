@@ -1,8 +1,10 @@
-import { TodoFilterProps } from "../types";
+import { useTodoContext } from "../hooks/useTodoContext";
 
-export const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
+export const TodoFilter = () => {
+  const { filter, setFilter } = useTodoContext();
+
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div>
       <label>
         Filter:
         <select

@@ -1,6 +1,8 @@
-import { TodoSortProps } from "../types";
+import { useTodoContext } from "../hooks/useTodoContext";
 
-export const TodoSort = ({ sortOrder, setSortOrder }: TodoSortProps) => {
+export const TodoSort = () => {
+  const { sortOrder, setSortOrder } = useTodoContext();
+
   return (
     <div>
       <label>
