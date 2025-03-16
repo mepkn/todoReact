@@ -9,22 +9,22 @@ export const TodoDelete = () => {
   const { todoId } = useParams<{ todoId: string }>();
   const { todos, deleteTodo } = useTodoContext();
 
-  const todo = todos.find((t) => t.id === Number(todoId));
+  const currentTodo = todos.find((t) => t.id === Number(todoId));
 
   useEffect(() => {
-    if (!todo) {
+    if (!currentTodo) {
       navigate("/");
     }
-  }, [todo, navigate]);
+  }, [currentTodo, navigate]);
 
   const handleDelete = () => {
-    if (todo) {
-      deleteTodo(todo.id);
+    if (currentTodo) {
+      deleteTodo(currentTodo.id);
       navigate("/");
     }
   };
 
-  if (!todo) {
+  if (!currentTodo) {
     return <div>Todo not found</div>;
   }
 
@@ -35,7 +35,7 @@ export const TodoDelete = () => {
         Are you sure you want to delete the following todo?
       </p>
       <p style={{ textAlign: "center" }}>
-        <strong>{todo.text}</strong>
+        <strong>{currentTodo.text}</strong>
       </p>
       <div
         style={{

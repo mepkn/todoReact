@@ -9,24 +9,24 @@ export const TodoEdit = () => {
   const { todoId } = useParams<{ todoId: string }>();
   const { todos, editTodo } = useTodoContext();
 
-  const todo = todos.find((t) => t.id === Number(todoId));
+  const currentTodo = todos.find((t) => t.id === Number(todoId));
 
-  const [editText, setEditText] = useState(todo?.text || "");
+  const [editText, setEditText] = useState(currentTodo ? currentTodo.text : '');
 
   useEffect(() => {
-    if (!todo) {
+    if (!currentTodo) {
       navigate("/");
     }
-  }, [todo, navigate]);
+  }, [currentTodo, navigate]);
 
-  const saveEdit = () => {
-    if (todo) {
-      editTodo(todo.id, editText);
+  const handleEdit = () => {
+    if (currentTodo && editText.trim() !== '') {
+      editTodo(currentTodo.id, editText);
       navigate("/");
     }
   };
 
-  if (!todo) {
+  if (!currentTodo) {
     return <div>Todo not found</div>;
   }
 
@@ -47,7 +47,7 @@ export const TodoEdit = () => {
           onChange={(e) => setEditText(e.target.value)}
           style={{ flexGrow: 1, marginBottom: 0 }}
         />
-        <button className="pico-background-jade-500" onClick={saveEdit}>
+        <button className="pico-background-jade-500" onClick={handleEdit}>
           Save
         </button>
         <button onClick={() => navigate("/")}>Cancel</button>

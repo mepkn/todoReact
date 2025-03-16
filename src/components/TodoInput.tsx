@@ -4,8 +4,10 @@ export const TodoInput = () => {
   const { input, setInput, addTodo } = useTodoContext();
 
   const handleAddTodo = () => {
-    addTodo(input);
-    setInput("");
+    if (input.trim() !== '') {
+      addTodo(input);
+      setInput("");
+    }
   };
 
   return (
