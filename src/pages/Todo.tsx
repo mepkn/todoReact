@@ -11,13 +11,10 @@ export const Todo = () => {
     <>
       <h1 style={{ textAlign: "center" }}>Todo List</h1>
       <TodoInput />
-      <details style={{ marginTop: "20px" }}>
-        <summary>⚒️</summary>
-        <ul>
-          <TodoFilter />
-          <TodoSort />
-        </ul>
-      </details>
+      <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+        <TodoFilter />
+        <TodoSort />
+      </div>
       <TodoList />
     </>
   );

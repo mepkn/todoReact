@@ -4,7 +4,7 @@ export const TodoFilter = () => {
   const { filter, setFilter } = useTodoContext();
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <label>
         Filter:
         <select

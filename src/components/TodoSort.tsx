@@ -4,9 +4,9 @@ export const TodoSort = () => {
   const { sortOrder, setSortOrder } = useTodoContext();
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <label>
-        Sort by Date:
+        Sort:
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value as "asc" | "desc")}
